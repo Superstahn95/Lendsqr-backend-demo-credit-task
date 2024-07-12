@@ -42,3 +42,19 @@ export const registerUserService = async (
     next(error);
   }
 };
+
+export const checkSupertestAuth = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { testProperty } = req.body;
+  if (!testProperty) {
+    return res.status(400).json({
+      message: "test property not defined",
+    });
+  }
+  res.status(200).json({
+    message: "this test should return successful",
+  });
+};
