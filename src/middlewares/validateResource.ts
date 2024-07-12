@@ -1,6 +1,6 @@
-import { error } from "console";
 import { NextFunction } from "express";
 import Joi from "joi";
+import { BadRequestError } from "../errors/BadRequestError";
 const validateResource = (
   schema: Joi.ObjectSchema,
   body: Object,
@@ -10,10 +10,10 @@ const validateResource = (
   if (result.error) {
     const error = result.error;
     //customize error after writing error controller
-    throw new Error(error.details[0].message);
+    const err = new BadRequestError(error.details[0].message);
+    next(err);
   } else {
     next();
   }
 };
-
 export default validateResource;
