@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import {
   registerUserService,
   checkSupertestAuth,
+  loginService,
 } from "../services/auth.service";
 
 export const registerUserController = async (
@@ -17,4 +18,11 @@ export const checkSupertestAuthController = async (
   next: NextFunction
 ) => {
   checkSupertestAuth(req, res, next);
+};
+export const loginUserController = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  loginService(req, res, next);
 };
